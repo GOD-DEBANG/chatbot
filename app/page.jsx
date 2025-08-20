@@ -1,10 +1,18 @@
 
+
 'use client';
 import { assets } from "@/assets/assets";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import Sidebar from "@/components/sidebar";
 import PromptBox from "@/components/PromptBox";
+
+// ✅ Import a modern aesthetic font
+import { Orbitron } from "next/font/google";
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
 
 export default function Home() {
   const [expand, setExpand] = useState(false);
@@ -22,7 +30,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden text-white">
+    <div className={`relative w-full h-screen overflow-hidden text-white ${orbitron.className}`}>
       {/* Neon animated gradient background */}
       <div
         className="absolute inset-0 -z-10 bg-gradient-to-br from-purple-800 via-black to-blue-900 animate-gradient"
@@ -54,7 +62,6 @@ export default function Home() {
               width={26}
               height={26}
               alt="chat"
-              // className="opacity-80 hover:opacity-100 transition-all"
               className="h-16 text-white invert"
             />
           </div>
@@ -66,14 +73,14 @@ export default function Home() {
                 <Image
                   src={assets.logo_icon}
                   alt="logo"
-                  width={90}
-                  height={90}
-                  className="drop-shadow-[0_0_20px_rgba(168,85,247,0.7)] animate-float"
+                  width={120}
+                  height={120}
+                  className="drop-shadow-[0_0_25px_rgba(168,85,247,0.8)] animate-float"
                 />
-                <p className="text-4xl font-extrabold bg-gradient-to-r from-fuchsia-400 via-purple-300 to-blue-400 bg-clip-text text-transparent animate-pulse-slow">
+                <p className="text-5xl font-extrabold bg-gradient-to-r from-fuchsia-400 via-purple-300 to-blue-400 bg-clip-text text-transparent animate-pulse-slow">
                   Hello, I am <span className="italic">Lunora</span>
                 </p>
-                <p className="text-lg text-gray-300 tracking-wide">
+                <p className="text-lg text-gray-300 tracking-wide opacity-80">
                   How can I help you today?
                 </p>
               </div>
