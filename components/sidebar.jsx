@@ -1,17 +1,15 @@
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { assets } from "@/assets/assets";
 import { useClerk, UserButton } from "@clerk/nextjs";
 import { useAppContext } from "@/context/AppContext";
-// Sidebar.js
-import ChatLabel from "@/components/ChatLabel";
-
+import { FaHome, FaShieldAlt, FaFileAlt, FaEnvelope } from "react-icons/fa";
 
 const Sidebar = ({ expand, setExpand }) => {
   const { openSignIn } = useClerk();
-  const { user } = useAppContext(); //  FIXED
-  const [openManue , setOpenManue] = useState({id : 0 , open : false})
+  const { user } = useAppContext();
 
   return (
     <div
@@ -29,9 +27,7 @@ const Sidebar = ({ expand, setExpand }) => {
             className="transition-all duration-500"
           />
           {expand && (
-            <span className="text-xl font-semibold tracking-wide">
-              Lunora
-            </span>
+            <span className="text-xl font-semibold tracking-wide">Lunora</span>
           )}
         </div>
 
@@ -50,37 +46,45 @@ const Sidebar = ({ expand, setExpand }) => {
       </div>
 
       {/* Middle Section */}
-      <div>
-        <button
-          className={`mt-8 flex items-center justify-center cursor-pointer ${
-            expand
-              ? "bg-primary hover:opacity-90 rounded-2xl gap-2 p-2.5 w-max"
-              : "group relative h-9 w-9 mx-auto hover:bg-gray-500/30 rounded-lg"
+      <div className="mt-10 flex-1 flex flex-col">
+        {/* Navigation Links */}
+        <nav
+          className={`text-white/80 text-sm font-medium flex flex-col justify-between flex-1 ${
+            expand ? "gap-10" : "items-center gap-8"
           }`}
         >
-          <Image
-            src={expand ? assets.chat_icon : assets.arrow_icon_dull}
-            alt="toggle sidebar"
-            width={22}
-            height={22}
-            className={expand ? "w-6" : "w-7"}
-          />
-          <div className="absolute w-max -top-12 -right-12 opacity-0 group-hover:opacity-100 transition bg-black text-white text-sm px-2 py-3 rounded-lg shadow-lg pointer-events-none">
-            New Chat
-            <div className="w-3 h-3 absolute bg-black rotate-45 left-4 -bottom-1.5"></div>
-          </div>
-          {expand && <p className="text-white text font-medium"> New Chat</p>}
-        </button>
+          <Link
+            href="/"
+            className="flex items-center gap-3 hover:text-white transition"
+          >
+            <FaHome size={20} />
+            {expand && "Home"}
+          </Link>
 
-        <div
-          className={`mt-8 text-white/25 text-sm ${
-            expand ? "block" : "hidden"
-          }`}
-        >
-          <p className="my-1">Recents</p>
-          <ChatLabel openManue = {openManue} setOpenManue={setOpenManue} />
+          <Link
+            href="/privacy"
+            className="flex items-center gap-3 hover:text-white transition"
+          >
+            <FaShieldAlt size={20} />
+            {expand && "Privacy"}
+          </Link>
 
-        </div>
+          <Link
+            href="/docs"
+            className="flex items-center gap-3 hover:text-white transition"
+          >
+            <FaFileAlt size={20} />
+            {expand && "Documentation"}
+          </Link>
+
+          <Link
+            href="/contact"
+            className="flex items-center gap-3 hover:text-white transition"
+          >
+            <FaEnvelope size={20} />
+            {expand && "Contact Us"}
+          </Link>
+        </nav>
       </div>
 
       {/* Footer */}
