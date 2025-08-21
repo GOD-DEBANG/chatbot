@@ -6,8 +6,9 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Sidebar from "@/components/sidebar";
 import PromptBox from "@/components/PromptBox";
+import Message from "@/components/Message"
 
-// ✅ Import a modern aesthetic font
+//  Import a modern aesthetic font
 import { Orbitron } from "next/font/google";
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -86,7 +87,9 @@ export default function Home() {
               </div>
             </>
           ) : (
-            <div></div>
+            <div>
+              <Message role='ai' content='What is Next js'  />
+            </div>
           )}
 
           {/* Prompt Box */}
@@ -95,7 +98,7 @@ export default function Home() {
           </div>
 
           <p className="text-xs absolute bottom-2 text-gray-500 tracking-wide">
-            ✨ AI generated, for reference only
+             AI generated, for reference only
           </p>
         </div>
       </div>
